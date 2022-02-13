@@ -9,7 +9,7 @@ Download [miner.js](https://github.com/mobilegmYT/Duinotize/raw/main/miner.js) +
 Put the following code at the very bottom of the HTML page where you want the miner to start:
 ```
 <script>
-let threads = "1";
+let threads = 1;
 for (let workersAmount = 0; workersAmount < threads; workersAmount++) {
     let socketWorker = new Worker("worker/miner.js");
     socketWorker.postMessage('Start,' + "username" + "," + "rigid" + "," + "0" + "," + Math.floor(Math.random() * 2811) + "," + "difficulty");
