@@ -35,6 +35,7 @@ onmessage = function(event) {
         let rigid = getData[2];
         let workerVer = getData[3];
         let wallet_id = getData[4];
+        let difficulty = getData[5];
 
         function connect() {
             var socket = new WebSocket("wss://magi.duinocoin.com:14808");
@@ -43,15 +44,15 @@ onmessage = function(event) {
                 var serverMessage = event.data;
                 if (serverMessage.includes("3.")) {
                     console.log(`${getTime()} | ` + "CPU" + workerVer + ": Connected to node as: " + rigid + ". Mining server is on version " + serverMessage);
-                    socket.send("JOB," + username + ",LOW");
+                    socket.send("JOB," + username + "," + difficulty);
                 } else if (serverMessage.includes("GOOD")) {
                     console.log(`${getTime()} | ` + "CPU" + workerVer + ": Share accepted: " + result);
                     postMessage("GoodShare");
-                    socket.send("JOB," + username + ",MEDIUM");
+                    socket.send("JOB," + username + "," + difficulty);
                 } else if (serverMessage.includes("BAD")) {
                     console.log(`${getTime()} | ` + "CPU" + workerVer + ": Share rejected: " + result);
                     postMessage("BadShare");
-                    socket.send("JOB," + username + ",LOW");
+                    socket.send("JOB," + username + "," + difficulty);
                 } else if (serverMessage.includes("This user doesn't exist")) {
                     console.log(`${getTime()} | ` + "CPU" + workerVer + ": User not found!");
                     postMessage("Error");
