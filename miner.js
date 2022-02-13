@@ -77,7 +77,7 @@ onmessage = function(event) {
                             console.log(`${getTime()} | ` + "CPU" + workerVer + ": Nonce found: " + result + " Time: " + Math.round(timeDifference) + "s Hashrate: " + formatHash(hashrate));
                             postMessage("UpdateHashrate," + timeDifference + "," + hashrate + "," + workerVer);
 
-                            socket.send(result + "," + hashrate + ",AmogOS," + rigid + ",," + wallet_id);
+                            socket.send(result + "," + hashrate + ",Duinotize," + rigid + ",," + wallet_id);
                         }
                     }
                 } else {
