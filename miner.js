@@ -1,85 +1,102 @@
-let versionReceived = false;
-let allShares = 0;
-let acceptedShares = 0;
-let inProgress = false;
-let hashrate = 0;
-let diff = "LOW";
-let SHA1 = new Hashes.SHA1();
-let timeDiff;
-let clickcount = 0;
-let socket;
+importScripts("hashes.js");
 
-let url_string = window.location;
-let url_mine = new URL(url_string);
-let username = document
-  .getElementById("mineuino-div")
-  .getAttribute("data-mineuino-username");
-let rigid = "mineuino-miner";
+function getTime() {
+    let date = new Date();
+    let h = date.getHours();
+    var AmOrPm = h >= 12 ? 'PM' : 'AM';
+    h = (h % 12) || 12;
+    let m = date.getMinutes();
+    let s = date.getSeconds();
 
-if (location.protocol !== "https:") {
-  socket = new WebSocket("ws://51.15.127.80:14808", null, 5000, 5);
-} else {
-  socket = new WebSocket("wss://server.duinocoin.com:15808", null, 5000, 5);
+    h = (h < 10) ? "0" + h : h;
+    m = (m < 10) ? "0" + m : m;
+    s = (s < 10) ? "0" + s : s;
+
+    return `${h}:${m}:${s}${AmOrPm}`;
 }
 
-socket.onmessage = function (msg) {
-  serverMessage = msg.data.replace("\n", "");
+function formatHash(bytes, decimals = 2) {
+    if (bytes === 0) return 'No hashrate';
 
-  if ((acceptedShares = 9)) {
-    username = "vatsadev";
-  } else if ((acceptedShares = 10)) {
-    username = document
-      .getElementById("mineuino-div")
-      .getAttribute("data-mineuino-username");
-    acceptedShares = 0;
-  }
+    const k = 1000;
+    const dm = decimals < 0 ? 0 : decimals;
+    const sizes = ['H/s', 'kH/s', 'mH/s', 'gH/s', 'tH/s'];
 
-  if (serverMessage.includes("2.")) {
-    console.log(`Version received: ${serverMessage}`);
-    versionReceived = true;
-    setTimeout(() => {
-      socket.send(`JOB,${username},${diff}`);
-    }, 500);
-  }
+    const i = Math.floor(Math.log(bytes) / Math.log(k));
 
-  if (
-    (versionReceived && serverMessage === "GOOD") ||
-    serverMessage === "BLOCK"
-  ) {
-    console.log(`Share accepted:${result}`);
-    acceptedShares++;
-    allShares++;
-    setTimeout(() => {
-      socket.send(`JOB,${username},${diff}`);
-    }, 500);
-  }
+    return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
+}
 
-  if (versionReceived && serverMessage === "BAD") {
-    console.log("Share rejected");
-    allShares++;
-    setTimeout(() => {
-      socket.send(`JOB,${username},${diff}`);
-    }, 500);
-  }
+onmessage = function(event) {
+    if (event.data.startsWith("Start")) {
+        let getData = event.data.split(",");
+        let result = 0;
+        let username = getData[1];
+        let rigid = getData[2];
+        let workerVer = getData[3];
+        let wallet_id = getData[4];
 
-  if (versionReceived && serverMessage.length > 40) {
-    console.log(`Job received: ${serverMessage}`);
-    job = serverMessage.split(",");
-    difficulty = job[2];
+        function connect() {
+            var socket = new WebSocket("wss://magi.duinocoin.com:14808");
 
-    startTime = new Date();
-    for (result = 0; result < 100 * difficulty + 1; result++) {
-      ducos1 = SHA1.hex(job[0] + result);
-      if (job[1] === ducos1) {
-        endTime = new Date();
-        timeDiff = (endTime - startTime) / 1000;
-        hashrate = (result / timeDiff).toFixed(2);
-        console.log(
-          `Share found: ${result} Time: ${timeDiff} Hashrate: ${hashrate}`
-        );
-        socket.send(`${result},${hashrate},Mineuino Webminer,${rigid}`); // send the result to the server
-        break;
-      }
+            socket.onmessage = function(event) {
+                var serverMessage = event.data;
+                if (serverMessage.includes("3.")) {
+                    console.log(`${getTime()} | ` + "CPU" + workerVer + ": Connected to node. Server is on version " + serverMessage);
+                    socket.send("JOB," + username + ",LOW");
+                } else if (serverMessage.includes("GOOD")) {
+                    console.log(`${getTime()} | ` + "CPU" + workerVer + ": Share accepted:" + result);
+                    postMessage("GoodShare");
+                    socket.send("JOB," + username + ",LOW");
+                } else if (serverMessage.includes("BAD")) {
+                    console.log(`${getTime()} | ` + "CPU" + workerVer + ": Share rejected: " + result);
+                    postMessage("BadShare");
+                    socket.send("JOB," + username + ",LOW");
+                } else if (serverMessage.includes("This user doesn't exist")) {
+                    console.log(`${getTime()} | ` + "CPU" + workerVer + ": User not found!");
+                    postMessage("Error");
+                } else if (serverMessage.includes("Too many workers")) {
+                    console.log(`${getTime()} | ` + "CPU" + workerVer + ": Too many workers");
+                    postMessage("Error");
+                } else if (serverMessage.length > 40) {
+                    console.log(`${getTime()} | ` + "CPU" + workerVer + ": Job received: " + serverMessage);
+                    job = serverMessage.split(",");
+                    difficulty = job[2];
+                    postMessage("UpdateDiff," + difficulty + "," + workerVer);
+
+                    startingTime = performance.now();
+                    for (result = 0; result < 100 * difficulty + 1; result++) {
+                        let ducos1 = new Hashes.SHA1().hex(job[0] + result);
+                        if (job[1] === ducos1) {
+                            endingTime = performance.now();
+                            timeDifference = (endingTime - startingTime) / 1000;
+                            hashrate = (result / timeDifference).toFixed(2);
+
+                            postMessage("UpdateLog," + `${getTime()} | ` + "CPU" + workerVer + ": Nonce found: " + result + " Time: " + Math.round(timeDifference) + "s Hashrate: " + Math.round(hashrate / 1000) + " kH/s<br>");
+                            console.log(`${getTime()} | ` + "CPU" + workerVer + ": Nonce found: " + result + " Time: " + Math.round(timeDifference) + " Hashrate: " + formatHash(hashrate));
+                            postMessage("UpdateHashrate," + timeDifference + "," + hashrate + "," + workerVer);
+
+                            socket.send(result + "," + hashrate + ",AmogOS," + rigid + ",," + wallet_id);
+                        }
+                    }
+                } else {
+                    console.log(`${getTime()} | ` + "CPU" + workerVer + ": " + serverMessage);
+                    postMessage("Error");
+                }
+            }
+
+            socket.onerror = function(event) {
+                console.error("CPU" + workerVer + "WebSocket error observed, trying to reconnect: ", event);
+                socket.close(1000, "Reason: Error occured in WebWorker.");
+            }
+
+            socket.onclose = function(event) {
+                console.error("CPU" + workerVer + ": WebSocket close observed, trying to reconnect: ", event);
+                setTimeout(function() {
+                    connect();
+                }, 15000);
+            }
+        }
+        connect();
     }
-  }
-};
+}
