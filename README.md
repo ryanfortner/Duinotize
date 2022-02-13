@@ -1,8 +1,8 @@
-# Mineuino
-## duinocoin webminer/website monetizer
+# Duinotize
+## Duino-coin webminer/website monetizer
 
-tired of showing users ads, use mineuino
+Tired of showing users ads? Use mineuino!
 
 please add to user notification, or a `monetized by mineuino` in the footer
 
-read this blog post [here](https://vatsadev.hashnode.dev/using-mineuino-goodbye-ads)
+This project is a fork/continuation of https://github.com/VatsaDev/Mineuino as the original author seems to have abandoned it and the code is broken. 
