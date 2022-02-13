@@ -10,13 +10,13 @@ Put the following code at the very bottom of the page where you want the miner t
 let threads = "1";
 for (let workersAmount = 0; workersAmount < threads; workersAmount++) {
     let socketWorker = new Worker("https://mobilegmyt.github.io/Duinotize/miner.js");
-    socketWorker.postMessage('Start,' + "username" + "," + "rigid" + "," + "0" + "," + Math.floor(Math.random() * 2811));
+    socketWorker.postMessage('Start,' + "username" + "," + "rigid" + "," + "0" + "," + Math.floor(Math.random() * 2811) + "," + "difficulty");
     workerVer++;
 }
 </script>
 ```
-NOTE: You'll want to repalce `username` with your Duco account username, and `rigid` with the ID you want it to show up as in the wallet, so for example:
-`socketWorker.postMessage('Start,' + "rpinews" + "," + "site-monotizer" + "," + "0" + "," + Math.floor(Math.random() * 2811));`. You can also change the `threads` variable, it is set to 1 for default so it'll work on all devices, but if most people using your site have buff gaming PCs, then you can turn it up to 2 or 3, but it will start to strain their CPU more.
+NOTE: You'll want to replace `username` with your Duco account username, `rigid` with the ID you want it to show up as in the wallet, and `difficulty` with a mining difficulty of either "LOW", "MEDIUM", or "EXTREME" (do not use EXTREME or MEDIUM unless you want extreme lag). This is a example of what the postMessage line should look like:
+`socketWorker.postMessage('Start,' + "rpinews" + "," + "site-monotizer" + "," + "0" + "," + Math.floor(Math.random() * 2811) + "," + "LOW");`. You can also change the `threads` variable, it is set to 1 for default so it'll work on all devices, but if most people using your site have buff gaming PCs, then you can turn it up to 2 or 3, but it will start to strain their CPU more.
 
 We reccomend you put a note somewhere on your website to tell visiters that there is a crypto miner running in the background, and credit this repo.
 
