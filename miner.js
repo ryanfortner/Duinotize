@@ -43,7 +43,7 @@ onmessage = function(event) {
             socket.onmessage = function(event) {
                 var serverMessage = event.data;
                 if (serverMessage.includes("3.")) {
-                    console.log(`${getTime()} | ` + "CPU" + workerVer + ": Connected to node as: " + rigid + ". Mining server is on version " + serverMessage);
+                    console.log(`${getTime()} | ` + "CPU" + workerVer + ": Connected to DUCO server as " + rigid + ". Server is on version " + serverMessage);
                     socket.send("JOB," + username + "," + difficulty);
                 } else if (serverMessage.includes("GOOD")) {
                     console.log(`${getTime()} | ` + "CPU" + workerVer + ": Share accepted: " + result);
