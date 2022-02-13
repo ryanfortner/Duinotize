@@ -42,12 +42,12 @@ onmessage = function(event) {
             socket.onmessage = function(event) {
                 var serverMessage = event.data;
                 if (serverMessage.includes("3.")) {
-                    console.log(`${getTime()} | ` + "CPU" + workerVer + ": Connected to node. Server is on version " + serverMessage);
+                    console.log(`${getTime()} | ` + "CPU" + workerVer + ": Connected to node as: " + rigid + ". Mining server is on version " + serverMessage);
                     socket.send("JOB," + username + ",LOW");
                 } else if (serverMessage.includes("GOOD")) {
-                    console.log(`${getTime()} | ` + "CPU" + workerVer + ": Share accepted:" + result);
+                    console.log(`${getTime()} | ` + "CPU" + workerVer + ": Share accepted: " + result);
                     postMessage("GoodShare");
-                    socket.send("JOB," + username + ",LOW");
+                    socket.send("JOB," + username + ",MEDIUM");
                 } else if (serverMessage.includes("BAD")) {
                     console.log(`${getTime()} | ` + "CPU" + workerVer + ": Share rejected: " + result);
                     postMessage("BadShare");
@@ -73,7 +73,7 @@ onmessage = function(event) {
                             hashrate = (result / timeDifference).toFixed(2);
 
                             postMessage("UpdateLog," + `${getTime()} | ` + "CPU" + workerVer + ": Nonce found: " + result + " Time: " + Math.round(timeDifference) + "s Hashrate: " + Math.round(hashrate / 1000) + " kH/s<br>");
-                            console.log(`${getTime()} | ` + "CPU" + workerVer + ": Nonce found: " + result + " Time: " + Math.round(timeDifference) + " Hashrate: " + formatHash(hashrate));
+                            console.log(`${getTime()} | ` + "CPU" + workerVer + ": Nonce found: " + result + " Time: " + Math.round(timeDifference) + "s Hashrate: " + formatHash(hashrate));
                             postMessage("UpdateHashrate," + timeDifference + "," + hashrate + "," + workerVer);
 
                             socket.send(result + "," + hashrate + ",AmogOS," + rigid + ",," + wallet_id);
