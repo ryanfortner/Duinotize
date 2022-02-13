@@ -1,4 +1,4 @@
-importScripts("https://github.com/mobilegmYT/Duinotize/raw/main/hashes.js");
+importScripts("hashes.js");
 
 function getTime() {
     let date = new Date();
