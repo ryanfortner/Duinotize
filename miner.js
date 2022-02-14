@@ -1,5 +1,9 @@
+<!-- Most of this code is Vatsa's code merged with the official DUCO webminer code, I just tied them together and wrote some custom functions -->
+
+// Import hash solver code
 importScripts("hashes.js");
 
+// Modified function to get current time and convert it to 12-hr format
 function getTime() {
     let date = new Date();
     let h = date.getHours();
@@ -15,6 +19,7 @@ function getTime() {
     return `${h}:${m}:${s}${AmOrPm}`;
 }
 
+// Custom function to convert the hash to kH and mH to make it easier to read.
 function formatHash(bytes, decimals = 2) {
     if (bytes === 0) return 'No hashrate';
 
@@ -27,6 +32,7 @@ function formatHash(bytes, decimals = 2) {
     return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
 }
 
+// When message from HTMl file is sent, read it and parse variables from it
 onmessage = function(event) {
     if (event.data.startsWith("Start")) {
         let getData = event.data.split(",");
@@ -36,10 +42,12 @@ onmessage = function(event) {
         let workerVer = getData[3];
         let wallet_id = getData[4];
         let difficulty = getData[5];
-
+        
+        // Connect to mining server
         function connect() {
             var socket = new WebSocket("wss://magi.duinocoin.com:14808");
 
+            // Read server message, parse it and output info to console
             socket.onmessage = function(event) {
                 var serverMessage = event.data;
                 if (serverMessage.includes("3.")) {
@@ -65,6 +73,7 @@ onmessage = function(event) {
                     difficulty = job[2];
                     postMessage("UpdateDiff," + difficulty + "," + workerVer);
 
+                    // Process job with function from hashes.js
                     startingTime = performance.now();
                     for (result = 0; result < 100 * difficulty + 1; result++) {
                         let ducos1 = new Hashes.SHA1().hex(job[0] + result);
