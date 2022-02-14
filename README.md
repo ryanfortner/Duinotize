@@ -25,5 +25,5 @@ This project is a fork/continuation of https://github.com/VatsaDev/Mineuino as t
 
 ## Notes
 - I made this in just 2 hours at 1AM, so if there are bugs PLEASE report them
-- I also have never touched node.js before, so if there are improvements that could be made to the code, please PR them in.
+- I also have never touched js before, so if there are improvements that could be made to the code, please PR them in.
 - You can change the value of the `threads` variable, but note that this might make some devices unable to connect to your website!
