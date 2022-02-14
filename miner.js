@@ -25,7 +25,7 @@ function formatHash(bytes, decimals = 2) {
 
     const k = 1000;
     const dm = decimals < 0 ? 0 : decimals;
-    const sizes = ['H/s', 'kH/s', 'mH/s', 'gH/s', 'tH/s'];
+    const sizes = ['H/s', 'kH/s', 'MH/s', 'GH/s', 'TH/s'];
 
     const i = Math.floor(Math.log(bytes) / Math.log(k));
 
