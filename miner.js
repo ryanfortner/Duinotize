@@ -1,4 +1,4 @@
-<!-- Most of this code is Vatsa's code merged with the official DUCO webminer code, I just tied them together and wrote some custom functions -->
+<!-- Most of this code is Vatsa and the official DUCO webminer code merged together, I just tied them together and wrote some custom functions -->
 
 // Import hash solver code
 importScripts("hashes.js");
