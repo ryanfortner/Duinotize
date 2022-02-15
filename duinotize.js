@@ -29,19 +29,20 @@ function formatHash(bytes, decimals = 2) {
 
 let result = 0;
 
-let workerVer = 0;
-
-
 // When message from HTMl file is sent, read it and parse variables from it
 onmessage = function(event) {
     if (event.data.startsWith("Start")) {
         let getData = event.data.split(",");
         let result = 0;
+        
         let username = getData[1];
         let rigid = getData[2];
-        let workerVer = getData[3];
-        let wallet_id = getData[4];
-        let difficulty = getData[5];
+        let difficulty = getData[3];
+        let workerVer = getData[4];
+        
+        let wallet_id = wallet_id = Math.floor(Math.random() * 2811);
+        rigid = rigid + wallet_id
+        
         function connect() {
             var socket = new WebSocket("wss://magi.duinocoin.com:14808");
             socket.onopen = function(event) {
