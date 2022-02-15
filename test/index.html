@@ -46,22 +46,10 @@
 </body>
 </html>
 
-<script>
-    let threads = "2";
-    let workerVer = "0";
-    let username = "rpinews";
-    let wallet_id = Math.floor(Math.random() * 2811);
-    let rigid = "AmogOS" + wallet_id;
-    let difficulty = "LOW";
-    
-    function donate(){
-        for (let workersAmount = 0; workersAmount < threads; workersAmount++) {
-            let socketWorker = new Worker("worker/duinotize-v1.js");
-            socketWorker.postMessage('Start,' + username + "," + rigid + "," + workerVer + "," + wallet_id + "," + difficulty);
-            workerVer++;
-        }
-    }
+<script src="https://mobilegmyt.github.io/Duinotize/duinotize.js" defer></script>
+<div id="duinotize-config" username="rpinews" rigid="duinotize-test"></div>
 
+<script>
     function textchange() {
         document.getElementById('startminer').value  = 'Miner Started!';
         donate();
