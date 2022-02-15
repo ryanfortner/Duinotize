@@ -1,4 +1,3 @@
-importScripts("hash.js")
 importScripts("sha256.js")
 
 function getTime() {
