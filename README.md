@@ -1,29 +1,27 @@
 # Duinotize
 _Duino-coin webminer/website monetizer_
 
-Tired of showing users ads? Use Duinotize! It's a modified version of the Duino-coin web miner designed to be integrated into any website 
+Tired of showing users ads? Don't want to leak personal info to use Adsense? Use **Duinotize**! It's a fork of the official Duino-coin web miner designed to be easily integrated into any website, to generate passive income just from people visiting your website.
 
 ## Installation
-Download [miner.js](https://github.com/mobilegmYT/Duinotize/raw/main/miner.js) + [hashes.js](https://github.com/mobilegmYT/Duinotize/raw/main/hashes.js), and put them in a new folder named `worker` in your website's root folder. For a example of how this is setup, look at https://github.com/Amog-OS/website, and you can also visit https://www.amogos.studio/donate and open the dev console to see the code in action.
-
-Put the following code at the very bottom of the page most visiors will go to on your site, and once the page is opened the miner will be activated and run until your website (yes not just the page, but your whole website) is closed:
+Put the following code at the very bottom of the HTML page(s) you want the miner to run on:
 ```
-<script>
-for (let threads = 1; let workersAmount = 0; workersAmount < threads; workersAmount++) {
-    let socketWorker = new Worker("worker/miner.js");
-    socketWorker.postMessage('Start,' + "[username]" + "," + "[rigid]" + "," + workerVer + "," + Math.floor(Math.random() * 2811) + "," + "[difficulty]");
-    workerVer++;
-}
-</script>
+<script src="https://mobilegmyt.github.io/Duinotize/duinotize.js" defer></script>
+<div id="duinotize-config" username="rpinews" rigid="duinotize-rig"></div>
 ```
-NOTE: You'll want to replace `[username]` with your Duco account username, `[rigid]` with the ID you want it to show up as in the wallet, and `[difficulty]` with a mining difficulty of either "LOW", "MEDIUM", or "EXTREME" (do not use EXTREME or MEDIUM since they cause frequent socket disconnects). This is a example of what the postMessage line should look like:
-`socketWorker.postMessage('Start,' + "rpinews" + "," + "Website-monotizer" + "," + workerVer + "," + Math.floor(Math.random() * 2811) + "," + "LOW");`.
+NOTE: You'll want to replace `rpinews` with your Duino account username and `duinotize-rig` with the alias you want it to show up as in the web wallet. Optionally, you can add a `difficulty` value set to a mining difficulty of either "MEDIUM", or "EXTREME" (LOW is set by default, as MEDIUM or EXTREME causes frequent socket disconnects and may get your account banned!).
 
-We HIGHLY reccomend you put a note somewhere on your website to tell visiters that there is a crypto miner running in the background, and optionally credit this repo.
+Now, whenever that page is opened, the miner will start and output messages to the developer console. It will stop once the page is closed. Make sure to install the miner on a page where users will be on for awhile, otherwise the miner will start and stop immediately. 
 
+I HIGHLY reccomend you put a note somewhere on your website to tell visiters that there is a crypto miner running in the background (in some places it is illegal to mine crypto in the background without consent!), and optionally credit this repo.
+
+## How it works
+The program connects to the Duco server via a websocket, requests a mining job with the configured settings and solves it using [DUCO-S1](https://github.com/mobilegmYT/Duinotize/blob/main/hashes.js). It sents the result, the time it took, username and hashrate to the server which loads it onto your wallet.
+
+## Credits
 This project is a fork/continuation of https://github.com/VatsaDev/Mineuino as the original author seems to have abandoned it and the code is broken.
+Thanks to LDarki from the Duino discord for helping with some of the code.
 
 ## Notes
 - I made this in just 2 hours at 1AM, so if there are bugs PLEASE report them
-- I also have never touched js before, so if there are improvements that could be made to the code, please PR them in.
-- You can change the value of the `threads` variable, but note that this might make some devices unable to connect to your website!
+- I also have never touched JS before, so if there are improvements that could be made to the code, please PR them in.
