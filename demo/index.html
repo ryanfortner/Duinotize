@@ -46,12 +46,15 @@
 </body>
 </html>
 
-<script src="https://mobilegmyt.github.io/Duinotize/duinotize.js" defer></script>
-<div id="duinotize-config" username="rpinews" rigid="duinotize-test"></div>
-
 <script>
     function textchange() {
         document.getElementById('startminer').value  = 'Miner Started!';
-        donate();
+        let threads = 1; 
+        let workerVer = 0;
+        for (let workersAmount = 0; workersAmount < threads; workersAmount++) {
+            let socketWorker = new Worker("/duinotize.js");
+            socketWorker.postMessage('Start,' + "rpinews" + "," + "duinotize-rig" + "," + workerVer + "," + Math.floor(Math.random() * 2811) + "," + "LOW");
+            workerVer++;
+        }
     }
 </script>
