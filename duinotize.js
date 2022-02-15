@@ -1,4 +1,4 @@
-importScripts("sha256.js")
+importScripts("sha1.js")
 
 function getTime() {
     let date = new Date();
