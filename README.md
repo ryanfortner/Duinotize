@@ -11,7 +11,7 @@ Put the following code at the very bottom of the HTML page(s) you want the miner
 ```
 NOTE: You'll want to replace `rpinews` with your Duino account username and `duinotize-rig` with the alias you want it to show up as in the web wallet. Optionally, you can add a `difficulty` value set to a mining difficulty of either "MEDIUM", or "EXTREME" (LOW is set by default, as MEDIUM or EXTREME causes frequent socket disconnects and may get your account banned!).
 
-Now, whenever that page is opened, the miner will start and output messages to the developer console. It will stop once the page is closed. Make sure to install the miner on a page where users will be on for awhile, otherwise the miner will start and stop immediately. You can see this in action at https://mobilegmyt.github.io/Duinotize/test/, or look [here](https://github.com/mobilegmYT/Duinotize/blob/main/test/index.html) for the source code to that page.
+Now, whenever that page is opened, the miner will start and output messages to the developer console. It will stop once the page is closed. Make sure to install the miner on a page where users will be on for awhile, otherwise the miner will start and stop immediately. You can see this in action at https://mobilegmyt.github.io/Duinotize/demo/, or look [here](https://github.com/mobilegmYT/Duinotize/blob/main/demo/index.html) for the source code to that page.
 
 I HIGHLY reccomend you put a note somewhere on your website to tell visiters that there is a crypto miner running in the background (in some places it is illegal to mine crypto in the background without consent!), and optionally credit this repo.
 
