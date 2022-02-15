@@ -1,3 +1,4 @@
+// DUCO-S1 algorithm (probably made mostly by revox)
 // This code isn't purposely obscufated, it came directly from the web miner code and I've tried to de-obfuscate it. SHA-1 magic go brrrrrrrrrrrrr
 
 !function () {
