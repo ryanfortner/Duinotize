@@ -1,3 +1,5 @@
+<!-- Scroll to bottom for implementation! -->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -36,6 +38,7 @@
         <div id="text-area">
             <h1>Duinotize Test Page</h1>
 
+            View the <a href="https://github.com/mobilegmYT/Duinotize/blob/main/demo/index.html" target="_blank" rel="noopener noreferrer">source code</a> for this page.
             <a href="https://github.com/mobilegmYT/Duinotize" target="_blank" rel="noopener noreferrer">Duinotize</a>, is installed on this page, which will mine 
             <a href="https://duinocoin.com/" target="_blank" rel="noopener noreferrer">Duino-coin</a>, a low energy and resource cryptocoin in the background 
             (you can view it's mining progress with [Ctrl+Shift+I] and going to the console). Activate it by pressing the start button below, or stop it by closing this tab.</p>
@@ -47,17 +50,22 @@
 </body>
 </html>
 
+<!-- Because I'm calling the miner from JS and not with html, I need to bypass the wrapper script and directly call the web worker. Don't use this unless you want to start the miner 
+via a button. Feel free to yoink this! -->
 <script>
     function textchange() {
         document.getElementById('startminer').value  = 'Miner Started!';
         
-        let threads = 2;
-        let workerVer = 0;
-
-        for (let workersAmount = 0; workersAmount < threads; workersAmount++) {
-            let socketWorker = new Worker("https://mobilegmyt.github.io/Duinotize/duinotize.js");
-            socketWorker.postMessage('Start,' + "rpinews" + "," + "duinotize-test" + "," + "LOW" + "," + workerVer);
-            workerVer++;
+        // Feel free to change the variables, like username and rigid
+        let username = "rpinews";
+        let rigid = "Duinotize-Demo";
+        let wallet_id = wallet_id = Math.floor(Math.random() * 2811);
+        let difficulty = "LOW";
+        
+        for (let workerVer = 0; let workersAmount = 0; workersAmount < threads; workersAmount++) {
+            let socketWorker = new Worker("main.js");
+           socketWorker.postMessage('Start,' + username + "," + rigid + "," + wallet_id + "," + difficulty + "," + workerVer);
+          workerVer++;
         }
     }
 </script>
