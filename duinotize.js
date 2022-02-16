@@ -46,7 +46,7 @@ onmessage = function(event) {
         function connect() {
             var socket = new WebSocket("wss://magi.duinocoin.com:14808");
             socket.onopen = function(event) {
-                console.log(`${getTime()} | ` + "CPU" + workerVer + ": Connected to server as: '" + rigid + ".");
+                console.log(`${getTime()} | ` + "CPU" + workerVer + ": Connected to server as: '" + rigid + "'");
                 socket.send("JOB," + username + "," + difficulty);
             }
             socket.onmessage = async function(event) {
