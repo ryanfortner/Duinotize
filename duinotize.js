@@ -1,4 +1,4 @@
-importScripts("sha1.js")
+importScripts("hash-duco-s1.js")
 
 function getTime() {
     let date = new Date();
