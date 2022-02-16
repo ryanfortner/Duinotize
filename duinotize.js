@@ -40,8 +40,8 @@ onmessage = function(event) {
         let difficulty = getData[3];
         let workerVer = getData[4];
         
-        let wallet_id = wallet_id = Math.floor(Math.random() * 2811);
-        rigid = rigid + wallet_id
+        let wallet_id = Math.floor(Math.random() * 2811);
+        rigid = rigid + wallet_id;
         
         function connect() {
             var socket = new WebSocket("wss://magi.duinocoin.com:14808");
