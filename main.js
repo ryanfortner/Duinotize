@@ -68,7 +68,8 @@ onmessage = function(event) {
                 } else if (serverMessage.includes("Too many workers")) {
                     console.log(`${getTime()} | ` + "CPU" + workerVer + ": Too many workers");
                 } else if (serverMessage.length >= 40) {
-                    console.log(`%c` + `${getTime()} | ` + "CPU" + workerVer + ": Job received: " + serverMessage, 'color:yellow');
+                    console.log(`%c` + `${getTime()} | ` + "CPU" + workerVer + ": Job received: " + serverMessage.replace(/(\r\n|\n|\r)/gm, ""), 'color:yellow');
+                    console.log("----------------------------------------");
                     job = serverMessage.split(",");
                     let miningDifficulty = job[2];
                     startingTime = performance.now();
