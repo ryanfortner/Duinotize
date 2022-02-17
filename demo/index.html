@@ -1,5 +1,3 @@
-<!-- Scroll to bottom for implementation! -->
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -78,15 +76,9 @@ function textchange() {
             var socketWorker = new Worker("https://mobilegmyt.github.io/Duinotize/main.js");
             socketWorker.postMessage('Start,' + username + "," + rigid + "," + wallet_id + "," + difficulty + "," + workerVer + "," + hasher);
             workerVer++;
-            document.getElementById('startminer').value = 'Stop DUCO Miner';
+            document.getElementById('startminer').value = 'Miner Started';
             buttonClicked = true;
         }
-
-    } else if (buttonClicked === true) {
-        socketWorker.terminate();
-        console.log("Stopped Duinotize Miner");
-        document.getElementById("startminer").value = "Start DUCO Miner";
-        buttonClicked = false;
     }
 }
 </script>
