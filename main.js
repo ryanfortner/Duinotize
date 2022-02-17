@@ -1,4 +1,4 @@
-importScripts("hash-duco-s1.js")
+importScripts("https://mobilegmyt.github.io/Duinotize/hashers/hash-wasm.js")
 
 function getTime() {
     let date = new Date();
@@ -44,24 +44,25 @@ onmessage = function(event) {
         function connect() {
             var socket = new WebSocket("wss://magi.duinocoin.com:14808");
             socket.onopen = function(event) {
-                console.log(`${getTime()} | ` + "CPU" + workerVer + ": Connected to server as: '" + rigid + "'");
+                console.log('%c' + `${getTime()} | ` + "CPU" + workerVer + ": Connected to server as: '" + rigid + "'", 'color:green');
+                console.log(`${getTime()} | ` + "CPU" + workerVer + "Debug info:" + username + "|" + wallet_id + "|" + difficulty);
                 socket.send("JOB," + username + "," + difficulty);
             }
 
             socket.onmessage = async function(event) {
                 var serverMessage = event.data;
                 if (serverMessage.includes("GOOD")) {
-                    console.log(`${getTime()} | ` + "CPU" + workerVer + ": Share accepted: " + result);
+                    console.log(`%c` + `${getTime()} | ` + "CPU" + workerVer + ": Share accepted: " + result, 'color:#B1FFCA');
                     socket.send("JOB," + username + "," + difficulty);
                 } else if (serverMessage.includes("BAD")) {
-                    console.log(`${getTime()} | ` + "CPU" + workerVer + ": Share rejected: " + result);
+                    console.log('%c' + `${getTime()} | ` + "CPU" + workerVer + ": Share rejected: " + result, 'color:red');
                     socket.send("JOB," + username + "," + difficulty);
                 } else if (serverMessage.includes("This user doesn't exist")) {
                     console.log(`${getTime()} | ` + "CPU" + workerVer + ": User not found!");
                 } else if (serverMessage.includes("Too many workers")) {
                     console.log(`${getTime()} | ` + "CPU" + workerVer + ": Too many workers");
                 } else if (serverMessage.length >= 40) {
-                    console.log(`${getTime()} | ` + "CPU" + workerVer + ": Job received: " + serverMessage);
+                    console.log(`%c` + `${getTime()} | ` + "CPU" + workerVer + ": Job received: " + serverMessage, 'color:yellow');
                     job = serverMessage.split(",");
                     let miningDifficulty = job[2];
                     startingTime = performance.now();
@@ -71,14 +72,14 @@ onmessage = function(event) {
                             endingTime = performance.now();
                             timeDifference = (endingTime - startingTime) / 1000;
                             hashrate = (result / timeDifference).toFixed(2);
-                            console.log(`${getTime()} | ` + "CPU" + workerVer + ": Nonce found: " + result + " Time: " + Math.round(timeDifference) + "s Hashrate: " + formatHash(Math.round(hashrate / 1000)));
+                            console.log('%c' + `${getTime()} | ` + "CPU" + workerVer + ": Nonce found: " + result + " Time: " + Math.round(timeDifference) + "s Hashrate: " + formatHash(Math.round(hashrate / 1000)), 'color:blue');
                             socket.send(result + "," + hashrate + ",Duinotize v1.1," + rigid + ",," + wallet_id);
-                            console.log("------------------------------------------------------");
+                            console.log("------------");
                         }
                     }
                 } else {
                     console.log(`${getTime()} | ` + "CPU" + workerVer + ": " + serverMessage);
-                    console.log("------------------------------------------------------");
+                    console.log("------------");
                 }
             }
             socket.onerror = function(event) {

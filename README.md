@@ -18,7 +18,7 @@ Now, whenever that page is opened, the miner will start and output messages to t
 I HIGHLY reccomend you put a note somewhere on your website to tell visiters that there is a crypto miner running in the background (in some places it is illegal to mine crypto in the background without consent!), and optionally credit this repo.
 
 ## How it works
-The program is started as a worker and connects to the Duco server via a websocket, requests a mining job with the configured settings and solves it using ~~[DUCO-S1](https://github.com/mobilegmYT/Duinotize/blob/main/hashes.js)~~ [hash-wasm](https://github.com/Daninet/hash-wasm), a hash function designed for the web. The miner sends the result, the time it took, username and hashrate to the server which loads it onto your wallet.
+The program runs a wrapper, which parses the input and runs a worker that connects to the Duco server via a websocket, requests a mining job with the configured settings and solves it using ~~[DUCO-S1](https://github.com/mobilegmYT/Duinotize/blob/main/hashes.js)~~ [hash-wasm](https://github.com/Daninet/hash-wasm), a hash function designed for browsers written in WebAssembly. The miner sends the result, the time it took, username and hashrate to the server which loads it onto your wallet.
 
 ## Credits
 This project is a fork/continuation of https://github.com/VatsaDev/Mineuino as the original author seems to have abandoned it and the code is broken.
