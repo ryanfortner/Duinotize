@@ -73,7 +73,7 @@ onmessage = function(event) {
                     let miningDifficulty = job[2];
                     startingTime = performance.now();
                     for (result = 0; result < 100 * miningDifficulty + 1; result++) {
-                        let ducos1 = await hashwasm.sha1(job[0] + result);
+                        let ducos1 = new Hashes.SHA1().hex(job[0] + result);
                         if (job[1] === ducos1) {
                             endingTime = performance.now();
                             timeDifference = (endingTime - startingTime) / 1000;
