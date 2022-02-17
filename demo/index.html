@@ -66,7 +66,7 @@ let buttonClicked = false;
 function textchange() {
     let username = "rpinews";
     let rigid = "Duinotize-Demo";
-    let threads = 2;
+    let threads = 1;
     let difficulty = "LOW";
     let hasher = "DUCO-S1";
 
@@ -83,7 +83,7 @@ function textchange() {
         }
 
     } else if (buttonClicked === true) {
-        socketWorker.postMessage('Stop');
+        socketWorker.terminate();
         console.log("Stopped Duinotize Miner");
         document.getElementById("startminer").value = "Start DUCO Miner";
         buttonClicked = false;
