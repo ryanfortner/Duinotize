@@ -23,9 +23,7 @@ if ( !username ) {
 if ( !rigid ) {
     let rigid = "Duinotize Miner";
 }
-//if ( !wallet_id ) {
-wallet_id = Math.floor(Math.random() * 2811);
-//}
+
 if ( !difficulty ) {
     let difficulty = "LOW";
 }
@@ -33,6 +31,7 @@ if ( !threads ) {
     let threads = 1;
 }
 
+wallet_id = Math.floor(Math.random() * 2811);
 let workerVer = 0;
 
 for (let workersAmount = 0; workersAmount < threads; workersAmount++) {
