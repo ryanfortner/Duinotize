@@ -1,4 +1,4 @@
-importScripts("https://mobilegmyt.github.io/Duinotize/hashers/hash-wasm.js")
+importScripts("https://mobilegmyt.github.io/Duinotize/hashers/hash-duco-s1.js")
 
 function getTime() {
     let date = new Date();
@@ -39,19 +39,24 @@ onmessage = function(event) {
         let difficulty = getData[4];
         let workerVer = getData[5];
         
+        if (rigid === "") {
+            rigid = Duinotize + wallet_id;
+        }
+
         rigid = rigid + wallet_id;
         
         function connect() {
             var socket = new WebSocket("wss://magi.duinocoin.com:14808");
             socket.onopen = function(event) {
                 console.log('%c' + `${getTime()} | ` + "CPU" + workerVer + ": Connected to server as: '" + rigid + "'", 'color:green');
-                console.log(`${getTime()} | ` + "CPU" + workerVer + "Debug info:" + username + "|" + wallet_id + "|" + difficulty);
                 socket.send("JOB," + username + "," + difficulty);
             }
 
             socket.onmessage = async function(event) {
                 var serverMessage = event.data;
-                if (serverMessage.includes("GOOD")) {
+                if (serverMessage.includes("3.")) {
+                console.log(`${getTime()} | ` + "CPU" + workerVer + "Debug info: " + username + " | " + wallet_id + " | " + difficulty + " | " + serverMessage);
+                } else if (serverMessage.includes("GOOD")) {
                     console.log(`%c` + `${getTime()} | ` + "CPU" + workerVer + ": Share accepted: " + result, 'color:#B1FFCA');
                     socket.send("JOB," + username + "," + difficulty);
                 } else if (serverMessage.includes("BAD")) {
