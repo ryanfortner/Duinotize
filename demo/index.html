@@ -75,7 +75,7 @@ function textchange() {
 
     if (buttonClicked === false) {
         for (let workersAmount = 0; workersAmount < threads; workersAmount++) {
-            let socketWorker = new Worker("https://mobilegmyt.github.io/Duinotize/main.js");
+            var socketWorker = new Worker("https://mobilegmyt.github.io/Duinotize/main.js");
             socketWorker.postMessage('Start,' + username + "," + rigid + "," + wallet_id + "," + difficulty + "," + workerVer + "," + hasher);
             workerVer++;
             document.getElementById('startminer').value = 'Stop DUCO Miner';

