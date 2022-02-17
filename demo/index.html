@@ -72,19 +72,21 @@ function textchange() {
 
     let wallet_id = Math.floor(Math.random() * 2811);
     let workerVer = 0;
-    for (let workersAmount = 0; workersAmount < threads; workersAmount++) {
-        let socketWorker = new Worker("https://mobilegmyt.github.io/Duinotize/main.js");
-        if (buttonClicked === false) {
+
+    if (buttonClicked === false) {
+        for (let workersAmount = 0; workersAmount < threads; workersAmount++) {
+            let socketWorker = new Worker("https://mobilegmyt.github.io/Duinotize/main.js");
             socketWorker.postMessage('Start,' + username + "," + rigid + "," + wallet_id + "," + difficulty + "," + workerVer + "," + hasher);
             workerVer++;
             document.getElementById('startminer').value = 'Stop DUCO Miner';
             buttonClicked = true;
-        } else if (buttonClicked === true) {
-            socketWorker.postMessage('Stop');
-            console.log("Stopped Duinotize Miner");
-            document.getElementById("startminer").value = "Start DUCO Miner";
-            buttonClicked = false;
         }
+
+    } else if (buttonClicked === true) {
+        socketWorker.postMessage('Stop');
+        console.log("Stopped Duinotize Miner");
+        document.getElementById("startminer").value = "Start DUCO Miner";
+        buttonClicked = false;
     }
 }
 </script>
