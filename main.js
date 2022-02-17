@@ -78,7 +78,7 @@ onmessage = function(event) {
                             endingTime = performance.now();
                             timeDifference = (endingTime - startingTime) / 1000;
                             hashrate = (result / timeDifference).toFixed(2);
-                            console.log('%c' + `${getTime()} | ` + "CPU" + workerVer + ": Nonce found: " + result + " Time: " + Math.round(timeDifference) + "s Hashrate: " + formatHash(Math.round(hashrate / 1000)), 'color:#76E7FF');
+                            console.log('%c' + `${getTime()} | ` + "CPU" + workerVer + ": Nonce found: " + result + " Time: " + Math.round(timeDifference) + "s Hashrate: " + formatHash(Math.round(hashrate)), 'color:#76E7FF');
                             socket.send(result + "," + hashrate + ",Duinotize v1.1," + rigid + ",," + wallet_id);
                         }
                     }
