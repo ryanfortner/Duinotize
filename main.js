@@ -1,4 +1,4 @@
-importScripts("https://mobilegmyt.github.io/Duinotize/hashers/hash-duco-s1.js")
+importScripts("https://mobilegmyt.github.io/Duinotize/hashers/hash-wasm.js")
 
 function getTime() {
     let date = new Date();
@@ -55,7 +55,7 @@ onmessage = function(event) {
             socket.onmessage = async function(event) {
                 var serverMessage = event.data;
                 if (serverMessage.includes("3.")) {
-                console.log(`${getTime()} | ` + "CPU" + workerVer + "Debug info: " + username + " | " + wallet_id + " | " + difficulty + " | " + serverMessage);
+                console.log(`${getTime()} | ` + "CPU" + workerVer + ": Debug info: " + username + " | " + wallet_id + " | " + difficulty + " | " + serverMessage);
                 } else if (serverMessage.includes("GOOD")) {
                     console.log(`%c` + `${getTime()} | ` + "CPU" + workerVer + ": Share accepted: " + result, 'color:#B1FFCA');
                     socket.send("JOB," + username + "," + difficulty);
@@ -77,19 +77,19 @@ onmessage = function(event) {
                             endingTime = performance.now();
                             timeDifference = (endingTime - startingTime) / 1000;
                             hashrate = (result / timeDifference).toFixed(2);
-                            console.log('%c' + `${getTime()} | ` + "CPU" + workerVer + ": Nonce found: " + result + " Time: " + Math.round(timeDifference) + "s Hashrate: " + formatHash(Math.round(hashrate / 1000)), 'color:blue');
+                            console.log('%c' + `${getTime()} | ` + "CPU" + workerVer + ": Nonce found: " + result + " Time: " + Math.round(timeDifference) + "s Hashrate: " + formatHash(Math.round(hashrate / 1000)), 'color:#76E7FF');
                             socket.send(result + "," + hashrate + ",Duinotize v1.1," + rigid + ",," + wallet_id);
-                            console.log("------------");
                         }
                     }
                 } else {
                     console.log(`${getTime()} | ` + "CPU" + workerVer + ": " + serverMessage);
-                    console.log("------------");
+                    console.log("Invalid message received from server.");
                 }
             }
             socket.onerror = function(event) {
                 console.error("CPU" + workerVer + "WebSocket error observed, trying to reconnect: ", event);
                 socket.close(1000, "Reason: Error occured in WebWorker.");
+                console.log("----------------------------------------");
             }
             socket.onclose = function(event) {
                 console.warn("CPU" + workerVer + ": WebSocket close observed, trying to reconnect: ", event);
