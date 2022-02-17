@@ -1,8 +1,9 @@
-// 
+// Load in hashers
 
 importScripts("https://mobilegmyt.github.io/Duinotize/hashers/hash-duco-s1.js")
 importScripts("https://mobilegmyt.github.io/Duinotize/hashers/hash-wasm.js")
 
+// Custom functions to get current time and make hashrate prettier
 function getTime() {
     let date = new Date();
     let h = date.getHours();
@@ -30,8 +31,12 @@ function formatHash(bytes, decimals = 2) {
     return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
 }
 
-// When message from HTMl file is sent, read it and parse variables from it
+// When message is received, read it and parse variables from it
 onmessage = function(event) {
+    if (event.data.startsWith("Stop")) {
+        self.close();
+    }
+
     if (event.data.startsWith("Start")) {
         let getData = event.data.split(",");
         let result = 0;
@@ -77,10 +82,11 @@ onmessage = function(event) {
                     startingTime = performance.now();
                     for (result = 0; result < 100 * miningDifficulty + 1; result++) {
                         if (hasher === "DUCO-S1") {
-                            let hashresult = new Hashes.SHA1().hex(job[0] + result);
-                        } 
-                        if (hasher === "WASM") {
+                            let hashresult = new Hashes.SHA1().hex(job[0] + result); 
+                        } else if (hasher === "WASM") {
                             let hashresult = await hashwasm.sha1(job[0] + result);
+                        } else {
+                            let hashresult = new Hashes.SHA1().hex(job[0] + result); 
                         }
 
                         if (job[1] === hashresult) {

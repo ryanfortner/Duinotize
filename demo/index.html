@@ -88,7 +88,7 @@ function textchange() {
     } else {
         document.getElementById("startminer").value = "Start DUCO Miner";
         buttonClicked = false;
-        socketWorker.terminate();
+        socketWorker.postMessage('Stop,');
         console.log("Stopped Duinotize Miner");
     }
 }
