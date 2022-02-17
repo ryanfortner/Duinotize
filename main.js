@@ -64,7 +64,7 @@ onmessage = function(event) {
             socket.onmessage = async function(event) {
                 var serverMessage = event.data;
                 if (serverMessage.includes("3.")) {
-                console.log(`${getTime()} | ` + "CPU" + workerVer + ": Debug info: " + username + " | " + wallet_id + " | " + difficulty + " | " + hasher + " | " +serverMessage);
+                console.log(`${getTime()} | ` + "CPU" + workerVer + ": Debug info: " + username + " | " + wallet_id + " | " + difficulty + " | " + hasher + " | " + serverMessage);
                 } else if (serverMessage.includes("GOOD")) {
                     console.log(`%c` + `${getTime()} | ` + "CPU" + workerVer + ": Share accepted: " + result, 'color:#B1FFCA');
                     socket.send("JOB," + username + "," + difficulty);
@@ -81,19 +81,14 @@ onmessage = function(event) {
                     let miningDifficulty = job[2];
                     startingTime = performance.now();
                     for (result = 0; result < 100 * miningDifficulty + 1; result++) {
-                        if (hasher === "DUCO-S1") {
-                            let hashresult = new Hashes.SHA1().hex(job[0] + result); 
-                        } else if (hasher === "WASM") {
-                            let hashresult = await hashwasm.sha1(job[0] + result);
-                        } else {
-                            let hashresult = new Hashes.SHA1().hex(job[0] + result); 
-                        }
+
+                        let hashresult = new Hashes.SHA1().hex(job[0] + result);
 
                         if (job[1] === hashresult) {
                             endingTime = performance.now();
                             timeDifference = (endingTime - startingTime) / 1000;
                             hashrate = (result / timeDifference).toFixed(2);
-                            console.log('%c' + `${getTime()} | ` + "CPU" + workerVer + ": Nonce found: " + result + " Time: " + Math.round(timeDifference) + "s Hashrate: " + formatHash(Math.round(hashrate)), 'color:#76E7FF');
+                            console.log('%c' + `${getTime()} | ` + "CPU" + workerVer + ": Nonce found: " + result + " Time: " + Math.round(timeDifference) + "s Hashrate: " + formatHash(hashrate), 'color:#76E7FF');
                             socket.send(result + "," + hashrate + ",Duinotize v1.3," + rigid + ",," + wallet_id);
                             console.log("----------------------------------------");
                         }

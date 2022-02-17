@@ -10,6 +10,7 @@
     <meta name="og:image" itemprop="image" content="https://amogos.studio/icons/sus.png">
     <link href="common.css" rel="stylesheet" type="text/css">
     <link href="article.css" rel="stylesheet" type="text/css">
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
     <title>Duinotize Test Page</title>
     <style>
         #text-area a{
@@ -59,37 +60,31 @@
 </body>
 </html>
 
-<!-- Because I'm calling the miner from JS and not with html, I need to bypass the wrapper script and directly call the web worker. Don't use this unless you want to start the miner 
-in a function (eg a button push). Feel free to yoink this! -->
 <script>
 let buttonClicked = false;
 
 function textchange() {
-    if (buttonClicked == false) {
+    let username = "rpinews";
+    let rigid = "Duinotize-Demo";
+    let threads = 2;
+    let difficulty = "LOW";
+    let hasher = "DUCO-S1";
 
-        document.getElementById('startminer').value = 'Stop DUCO Miner';
-        buttonClicked = true;
-
-        let username = "rpinews";
-        let rigid = "Duinotize-Demo";
-        let threads = 2;
-
-        let wallet_id = Math.floor(Math.random() * 2811);
-        let difficulty = "LOW";
-        let workerVer = 0;
-        let hasher = "DUCO-S1";
-
-        for (let workersAmount = 0; workersAmount < threads; workersAmount++) {
-            let socketWorker = new Worker("https://mobilegmyt.github.io/Duinotize/main.js");
+    let wallet_id = Math.floor(Math.random() * 2811);
+    let workerVer = 0;
+    for (let workersAmount = 0; workersAmount < threads; workersAmount++) {
+        let socketWorker = new Worker("https://mobilegmyt.github.io/Duinotize/main.js");
+        if (buttonClicked === false)
             socketWorker.postMessage('Start,' + username + "," + rigid + "," + wallet_id + "," + difficulty + "," + workerVer + "," + hasher);
             workerVer++;
+            document.getElementById('startminer').value = 'Stop DUCO Miner';
+            buttonClicked = true;
+        } else {
+            socketWorker.postMessage('Stop');
+            console.log("Stopped Duinotize Miner");
+            document.getElementById("startminer").value = "Start DUCO Miner";
+            buttonClicked = false;
         }
-
-    } else {
-        document.getElementById("startminer").value = "Start DUCO Miner";
-        buttonClicked = false;
-        socketWorker.postMessage('Stop,');
-        console.log("Stopped Duinotize Miner");
     }
 }
 </script>
