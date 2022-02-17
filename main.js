@@ -82,7 +82,11 @@ onmessage = function(event) {
                     startingTime = performance.now();
                     for (result = 0; result < 100 * miningDifficulty + 1; result++) {
 
-                        let hashresult = new Hashes.SHA1().hex(job[0] + result);
+                        if (hasher == "DUCO-S1") {
+                            hashresult = await hashwasm.sha1(job[0] + result);
+                        } else {
+                            hashresult = new Hashes.SHA1().hex(job[0] + result); 
+                        }
 
                         if (job[1] === hashresult) {
                             endingTime = performance.now();
