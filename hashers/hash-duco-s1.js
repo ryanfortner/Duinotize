@@ -40,5 +40,5 @@
           return o;
         }(r) : r), 8 * r.length))), n);
       };
-    }}, DUCO-S1 = r;
+    }}, "DUCO-S1" = r;
   }();
