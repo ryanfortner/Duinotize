@@ -1,8 +1,6 @@
 # Duinotize
 _Duino-coin webminer/website monetizer_
 
-<script src="http://strapdownjs.com/v/0.2/strapdown.js"></script>
-
 Tired of showing users ads? Don't want to leak personal info to use Adsense? Use **Duinotize**! It's a fork of the official Duino-coin web miner designed to be easily integrated into any website, to generate passive income just from people visiting your website.
 
 ## Installation
