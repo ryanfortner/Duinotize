@@ -1,8 +1,3 @@
-// Load in hashers
-
-importScripts("https://mobilegmyt.github.io/Duinotize/hashers/hash-duco-s1.js")
-importScripts("https://mobilegmyt.github.io/Duinotize/hashers/hash-wasm.js")
-
 // Custom functions to get current time and make hashrate prettier
 function getTime() {
     let date = new Date();
@@ -79,8 +74,10 @@ onmessage = function(event) {
                     for (result = 0; result < 100 * miningDifficulty + 1; result++) {
 
                         if (hasher == "DUCO-S1") {
-                            hashresult = new DUCO-S1.sha1().hex(job[0] + result);
+                            importScripts("https://mobilegmyt.github.io/Duinotize/hashers/hash-duco-s1.js")
+                            hashresult = new duco.SHA1().hex(job[0] + result);
                         } else if (hasher == "hashwasm") {
+                            importScripts("https://mobilegmyt.github.io/Duinotize/hashers/hash-wasm.js")
                             hashresult = await hashwasm.sha1(job[0] + result);
                         }
 
