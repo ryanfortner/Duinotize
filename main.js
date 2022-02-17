@@ -1,3 +1,4 @@
+importScripts("https://mobilegmyt.github.io/Duinotize/hashers/hash-duco-s1.js")
 importScripts("https://mobilegmyt.github.io/Duinotize/hashers/hash-wasm.js")
 
 function getTime() {
