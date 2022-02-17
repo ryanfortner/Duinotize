@@ -70,7 +70,6 @@ function textchange() {
         document.getElementById('startminer').value = 'Stop DUCO Miner';
         buttonClicked = true;
 
-        // Feel free to change the variables username and rigid (miner alias), changing anything else might break the code.
         let username = "rpinews";
         let rigid = "Duinotize-Demo";
         let threads = 2;
@@ -78,10 +77,11 @@ function textchange() {
         let wallet_id = Math.floor(Math.random() * 2811);
         let difficulty = "LOW";
         let workerVer = 0;
+        let hasher = "DUCO-S1";
 
         for (let workersAmount = 0; workersAmount < threads; workersAmount++) {
             let socketWorker = new Worker("https://mobilegmyt.github.io/Duinotize/main.js");
-            socketWorker.postMessage('Start,' + username + "," + rigid + "," + wallet_id + "," + difficulty + "," + workerVer);
+            socketWorker.postMessage('Start,' + username + "," + rigid + "," + wallet_id + "," + difficulty + "," + workerVer + "," + hasher);
             workerVer++;
         }
 
