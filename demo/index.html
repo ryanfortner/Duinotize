@@ -79,7 +79,7 @@ function textchange() {
             workerVer++;
             document.getElementById('startminer').value = 'Stop DUCO Miner';
             buttonClicked = true;
-        } else {
+        } else if (buttonClicked === true) {
             socketWorker.postMessage('Stop');
             console.log("Stopped Duinotize Miner");
             document.getElementById("startminer").value = "Start DUCO Miner";

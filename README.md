@@ -15,7 +15,7 @@ Make sure to replace `rpinews` with your username and `duinotize-rig` with the n
 
 - `difficulty` variable with a mining difficulty of either "LOW", "MEDIUM", or "EXTREME" (LOW is the default, as MEDIUM or EXTREME causes frequent socket disconnects and may get your account banned!)
 - `threads` variable, to choose how many threads the miner uses. Anything over 1 could cause lag on some devices, and even prevent the website from loading on them
-- `hasher` variable, to choose which hasher to use. You can choose `DUCO-S1` or `WASM`. `WASM` has a exteemely low hashrate on some devices, but a very high hashrate on others. `DUCO-S1` is the default.
+- `hasher` variable, to choose which hasher to use. You can choose `DUCO-S1` or `hashwasm`. `hashwasm` has a extremely low hashrate on some devices, but a very high hashrate on others. `DUCO-S1` is the default hasher.
 
 For example, a custom config might look like this:
 ```

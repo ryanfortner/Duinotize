@@ -7,7 +7,7 @@
       var t = (65535 & r) + (65535 & n);
       return (r >> 16) + (n >> 16) + (t >> 16) << 16 | 65535 & t;
     }
-    r = {SHA1: function (r) {
+    r = {sha1: function (r) {
       var n = !(!r || "boolean" != typeof r.uppercase) && r.uppercase, t = !r || "boolean" != typeof r.utf8 || r.utf8;
       this.hex = function (r) {
         return function (r, n) {
@@ -40,5 +40,5 @@
           return o;
         }(r) : r), 8 * r.length))), n);
       };
-    }}, Hashes = r;
+    }}, DUCO-S1 = r;
   }();

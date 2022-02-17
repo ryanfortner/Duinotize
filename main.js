@@ -83,9 +83,9 @@ onmessage = function(event) {
                     for (result = 0; result < 100 * miningDifficulty + 1; result++) {
 
                         if (hasher == "DUCO-S1") {
+                            hashresult = new DUCO-S1.sha1().hex(job[0] + result);
+                        } else if (hasher == "hashwasm") {
                             hashresult = await hashwasm.sha1(job[0] + result);
-                        } else {
-                            hashresult = new Hashes.SHA1().hex(job[0] + result); 
                         }
 
                         if (job[1] === hashresult) {
