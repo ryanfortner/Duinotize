@@ -22,13 +22,22 @@
             margin-right: -180px;
             padding: 12px;
             outline: none;
-            background-image: linear-gradient(-30deg, #297EFF, #8FC7FF);
+            background-image: linear-gradient(-30deg, #297EFF, #73b9ff);
             color: #ffffff;
             font-size: 12px;
             border: none;
             border-radius: 18px;
             font-family: "Poppins";
             cursor: pointer;
+            box-shadow: 0 3px #999;
+        }
+        #startminer:hover{
+            background-image: linear-gradient(-30deg, #0f6fff, #62aefa);
+        }
+        #startminer:active{
+            background-image: linear-gradient(-30deg, #0f6fff, #62aefa);
+            box-shadow: 0 1px #999;
+            transform: translateY(4px);
         }
     </style>
 </head>
@@ -53,23 +62,34 @@
 <!-- Because I'm calling the miner from JS and not with html, I need to bypass the wrapper script and directly call the web worker. Don't use this unless you want to start the miner 
 in a function (eg a button push). Feel free to yoink this! -->
 <script>
+let buttonClicked = false;
+
 function textchange() {
-    document.getElementById('startminer').value = 'Miner Started!';
+    if (buttonClicked == false) {
 
-    // Feel free to change the variables username and rigid (miner alias), changing anything else might break the code.
-    let username = "rpinews";
-    let rigid = "Duinotize-Demo";
-    let threads = 2;
+        document.getElementById('startminer').value = 'Stop DUCO Miner';
+        buttonClicked = true;
 
-    let wallet_id = Math.floor(Math.random() * 2811);
-    let difficulty = "LOW";
-    let workerVer = 0;
-    
+        // Feel free to change the variables username and rigid (miner alias), changing anything else might break the code.
+        let username = "rpinews";
+        let rigid = "Duinotize-Demo";
+        let threads = 2;
 
-    for (let workersAmount = 0; workersAmount < threads; workersAmount++) {
-        let socketWorker = new Worker("https://mobilegmyt.github.io/Duinotize/main.js");
-        socketWorker.postMessage('Start,' + username + "," + rigid + "," + wallet_id + "," + difficulty + "," + workerVer);
-        workerVer++;
+        let wallet_id = Math.floor(Math.random() * 2811);
+        let difficulty = "LOW";
+        let workerVer = 0;
+
+        for (let workersAmount = 0; workersAmount < threads; workersAmount++) {
+            let socketWorker = new Worker("https://mobilegmyt.github.io/Duinotize/main.js");
+            socketWorker.postMessage('Start,' + username + "," + rigid + "," + wallet_id + "," + difficulty + "," + workerVer);
+            workerVer++;
+        }
+
+    } else {
+        document.getElementById("startminer").value = "Start DUCO Miner";
+        buttonClicked = false;
+        sockerWorker.terminate();
+        console.log("Stopped Duinotize Miner");
     }
 }
 </script>
