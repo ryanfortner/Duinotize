@@ -53,19 +53,19 @@
 <!-- Because I'm calling the miner from JS and not with html, I need to bypass the wrapper script and directly call the web worker. Don't use this unless you want to start the miner 
 via a button. Feel free to yoink this! -->
 <script>
-    function textchange() {
-        document.getElementById('startminer').value  = 'Miner Started!';
-        
-        // Feel free to change the variables, like username and rigid (miner alias), changing anything else might break the code.
-        let username = "rpinews";
-        let rigid = "Duinotize-Demo";
-        let wallet_id = wallet_id = Math.floor(Math.random() * 2811);
-        let difficulty = "LOW";
-        
-        for (let workerVer = 0; let workersAmount = 0; workersAmount < threads; workersAmount++) {
-            let socketWorker = new Worker("main.js");
-           socketWorker.postMessage('Start,' + username + "," + rigid + "," + wallet_id + "," + difficulty + "," + workerVer);
-          workerVer++;
-        }
+function textchange() {
+    document.getElementById('startminer').value  = 'Miner Started!';
+    
+    // Feel free to change the variables, like username and rigid (miner alias), changing anything else might break the code.
+    let username = "rpinews";
+    let rigid = "Duinotize-Demo";
+    let wallet_id = wallet_id = Math.floor(Math.random() * 2811);
+    let difficulty = "LOW";
+    
+    for (let workerVer = 0; let workersAmount = 0; workersAmount < threads; workersAmount++) {
+        let socketWorker = new Worker("main.js");
+        socketWorker.postMessage('Start,' + username + "," + rigid + "," + wallet_id + "," + difficulty + "," + workerVer);
+        workerVer++;
     }
+}
 </script>
