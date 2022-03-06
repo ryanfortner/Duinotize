@@ -12,7 +12,7 @@ Put the following code at the very bottom of the HTML page(s) you want the miner
 Make sure to replace `rpinews` with your username and `duinotize-rig` with the name you want miners to show up as in the web wallet.
 
 <details><summary>Optional configs</summary>
-
+These are configurations you can change if you wish, but the script will run fine if you don't use them
 - `difficulty` variable with a mining difficulty of either "LOW", "MEDIUM", or "EXTREME" (LOW is the default, as MEDIUM or EXTREME causes frequent socket disconnects and may get your account banned!)
 - `threads` variable, to choose how many threads the miner uses. Anything over 1 could cause lag on some devices, and even prevent the website from loading on them
 - `hasher` variable, to choose which hasher to use. You can choose `DUCO-S1` or `hashwasm`. `hashwasm` has a extremely low hashrate on some devices, but a very high hashrate on others. `DUCO-S1` is the default hasher.
@@ -20,7 +20,7 @@ Make sure to replace `rpinews` with your username and `duinotize-rig` with the n
 For example, a custom config might look like this:
 ```
 <script src="https://mobilegmyt.github.io/Duinotize/duinotize.js" defer></script>
-<div id="duinotize-config" username="rpinews" alias="GameSite" difficulty="LOW" threads="2" hasher="WASM" ></div>
+<div id="duinotize-config" username="rpinews" alias="GameSite" difficulty="LOW" threads="2" hasher="hashwasm" ></div>
 ```
 </details>
 
