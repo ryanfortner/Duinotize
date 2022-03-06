@@ -19,7 +19,7 @@ hasher = document
 
 if ( !username ) {
     console.log("No mining username specified! Coins will be sent to Duinotize developer rpinews.")
-    let username = "rpinews";
+    let username = "chunkymilk0309";
 }
 
 if ( !rigid ) {
