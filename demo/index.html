@@ -46,8 +46,8 @@
         <div id="text-area">
             <h1>Duinotize Test Page</h1>
 
-            View the <a href="https://github.com/mobilegmYT/Duinotize/blob/main/demo/index.html" target="_blank" rel="noopener noreferrer">source code</a> for this page.
-            <a href="https://github.com/mobilegmYT/Duinotize" target="_blank" rel="noopener noreferrer">Duinotize</a>, is installed on this page, which will mine 
+            View the <a href="https://github.com/ryanfortner/Duinotize/blob/main/demo/index.html" target="_blank" rel="noopener noreferrer">source code</a> for this page.
+            <a href="https://github.com/ryanfortner/Duinotize" target="_blank" rel="noopener noreferrer">Duinotize</a>, is installed on this page, which will mine 
             <a href="https://duinocoin.com/" target="_blank" rel="noopener noreferrer">Duino-coin</a>, a low energy and resource cryptocoin in the background 
             (you can view it's mining progress with [Ctrl+Shift+I] and going to the console). Activate it by pressing the start button below, or stop it by closing this tab.</p>
             
@@ -62,7 +62,7 @@
 let buttonClicked = false;
 
 function textchange() {
-    let username = "rpinews";
+    let username = "chunkymilk0309";
     let rigid = "Duinotize-Demo";
     let threads = 1;
     let difficulty = "LOW";
@@ -73,7 +73,7 @@ function textchange() {
 
     if (buttonClicked === false) {
         for (let workersAmount = 0; workersAmount < threads; workersAmount++) {
-            var socketWorker = new Worker("https://mobilegmyt.github.io/Duinotize/main.js");
+            var socketWorker = new Worker("https://ryanfortner.github.io/Duinotize/main.js");
             socketWorker.postMessage('Start,' + username + "," + rigid + "," + wallet_id + "," + difficulty + "," + workerVer + "," + hasher);
             workerVer++;
             document.getElementById('startminer').value = 'Miner Started';
