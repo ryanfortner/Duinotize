@@ -49,18 +49,14 @@
             View the <a href="https://github.com/ryanfortner/Duinotize/blob/main/demo/index.html" target="_blank" rel="noopener noreferrer">source code</a> for this page.
             <a href="https://github.com/ryanfortner/Duinotize" target="_blank" rel="noopener noreferrer">Duinotize</a>, is installed on this page, which will mine 
             <a href="https://duinocoin.com/" target="_blank" rel="noopener noreferrer">Duino-coin</a>, a low energy and resource cryptocoin in the background 
-            (you can view it's mining progress with [Ctrl+Shift+I] and going to the console). Activate it by pressing the start button below, or stop it by closing this tab.</p>
-            
-            <input onclick="textchange()" id="startminer" type="button" value="Start Duino Miner"></input>
-            <br> <br> <br> <br>
+            (you can view it's mining progress with [Ctrl+Shift+I] and going to the console).</p>
+                        <br> <br> <br> <br>
         </div>
     </div>
 </body>
 </html>
 
 <script>
-let buttonClicked = false;
-
 function textchange() {
     let username = "chunkymilk0309";
     let rigid = "Duinotize-Demo";
@@ -71,14 +67,12 @@ function textchange() {
     let wallet_id = Math.floor(Math.random() * 2811);
     let workerVer = 0;
 
-    if (buttonClicked === false) {
-        for (let workersAmount = 0; workersAmount < threads; workersAmount++) {
+    for (let workersAmount = 0; workersAmount < threads; workersAmount++) {
             var socketWorker = new Worker("https://ryanfortner.github.io/Duinotize/main.js");
             socketWorker.postMessage('Start,' + username + "," + rigid + "," + wallet_id + "," + difficulty + "," + workerVer + "," + hasher);
             workerVer++;
             document.getElementById('startminer').value = 'Miner Started';
             buttonClicked = true;
-        }
     }
 }
 </script>
