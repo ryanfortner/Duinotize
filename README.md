@@ -7,9 +7,9 @@ Tired of showing users ads? Don't want to leak personal info to use Adsense? Use
 Put the following code at the very bottom of the HTML page(s) you want the miner to run on:
 ```
 <script src="https://mobilegmyt.github.io/Duinotize/duinotize.js" defer></script>
-<div id="duinotize-config" username="rpinews" alias="duinotize-rig"></div>
+<div id="duinotize-config" username="chunkymilk0309" alias="duinotize-rig"></div>
 ```
-Make sure to replace `rpinews` with your username and `duinotize-rig` with the name you want miners to show up as in the web wallet.
+Make sure to replace `chunkymilk0309` with your username and `duinotize-rig` with the name you want miners to show up as in the web wallet.
 
 <details><summary>Optional configs</summary>
 These are configurations you can change if you wish, but the script will run fine if you don't use them
@@ -20,7 +20,7 @@ These are configurations you can change if you wish, but the script will run fin
 For example, a custom config might look like this:
 ```
 <script src="https://mobilegmyt.github.io/Duinotize/duinotize.js" defer></script>
-<div id="duinotize-config" username="rpinews" alias="GameSite" difficulty="LOW" threads="2" hasher="hashwasm" ></div>
+<div id="duinotize-config" username="chunkymilk0309" alias="GameSite" difficulty="LOW" threads="2" hasher="hashwasm" ></div>
 ```
 </details>
 
@@ -30,7 +30,7 @@ Some people might want to trigger the miner with JS instead of HTML (eg if you w
 
 ```
 // Configs
-let username = "rpinews";
+let username = "chunkymilk0309";
 let rigid = "duinotize-rig";
 let threads = 1;
 let difficulty = "LOW";
@@ -54,11 +54,3 @@ I HIGHLY reccomend you put a note somewhere on your website to tell visiters tha
 
 ## How it works
 The program runs a wrapper, which parses the input and runs a worker that connects to the Duco server via a websocket, requests a mining job with the configured settings and solves it using either [DUCO-S1](https://github.com/mobilegmYT/Duinotize/blob/main/hashes.js) or [hash-wasm](https://github.com/Daninet/hash-wasm).The miner sends the result, the time it took, username and hashrate to the server which loads it onto your wallet.
-
-## Credits
-This project is a fork/continuation of https://github.com/VatsaDev/Mineuino as the original author seems to have abandoned it and the code is broken.
-Thanks to LDarki from the Duino discord for helping with some of the code.
-
-## Notes
-- I made this in just 2 hours at 1AM, so if there are bugs PLEASE report them
-- I also have never touched JS before, so if there are improvements that could be made to the code, please PR them in.
